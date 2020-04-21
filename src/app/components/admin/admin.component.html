@@ -1,0 +1,173 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center pt-3">
+            <h1>Вы можете добавлять/удалять учеников и учетелей в системе</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 justify-content-center">
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Учителя" class="pt-5">
+                    <div class="tab-content">
+                        <table mat-table [dataSource]="dataTeachers">
+
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                        [checked]="selectionTeachers.hasValue() && isAllSelected()"
+                                        [indeterminate]="selectionTeachers.hasValue() && !isAllSelected()"
+                                        [aria-label]="checkboxLabel()">
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox
+                                        (change)="$event ? selectionTeachers.toggle(row) : null; changeCheckBox($event); "
+                                        [checked]="selectionTeachers.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> ID </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+
+                            <!-- Login Column -->
+                            <ng-container matColumnDef="login">
+                                <th mat-header-cell *matHeaderCellDef> Логин </th>
+                                <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+                            </ng-container>
+
+                            <!-- Password Column -->
+                            <ng-container matColumnDef="password">
+                                <th mat-header-cell *matHeaderCellDef> Пароль </th>
+                                <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+                            </ng-container>
+
+                            <!-- Fio Column -->
+                            <ng-container matColumnDef="fio">
+                                <th mat-header-cell *matHeaderCellDef> ФИО </th>
+                                <td mat-cell *matCellDef="let element"> {{element.fio}} </td>
+                            </ng-container>
+
+                            <!-- Items Column -->
+                            <ng-container matColumnDef="items">
+                                <th mat-header-cell *matHeaderCellDef> Предметы </th>
+                                <td mat-cell *matCellDef="let element"> {{element.items}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <th mat-header-cell *matHeaderCellDef> </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <fa-icon [icon]="faUserEdit" (click)="editTeacher(element)">
+                                    </fa-icon>
+                                </td>
+                            </ng-container>
+
+                            <!-- (click)="editTeacher(row)" -->
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsTeachers"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsTeachers;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                    <div class="m-3 text-center justify-content-between d-flex">
+                        <button mat-raised-button color="primary" (click)="addTeacher()">
+                            Добавить учителя
+                        </button>
+                        <button mat-raised-button color="warn" (click)="deleteTeacher()" [disabled]="flagDeleteTeacher">
+                            Удалить выбранные
+                        </button>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Ученики">
+                    <div class="tab-content">
+                        <table mat-table [dataSource]="dataStudents">
+                              <!-- Checkbox Column -->
+                              <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox (change)="$event ? masterToggle2() : null"
+                                        [checked]="selectionStudents.hasValue() && isAllSelected2()"
+                                        [indeterminate]="selectionStudents.hasValue() && !isAllSelected2()"
+                                        [aria-label]="checkboxLabel2()">
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox
+                                        (change)="$event ? selectionStudents.toggle(row) : null; changeCheckBox2($event); "
+                                        [checked]="selectionStudents.isSelected(row)" [aria-label]="checkboxLabel2(row)">
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> ID </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+
+                            <!-- Login Column -->
+                            <ng-container matColumnDef="login">
+                                <th mat-header-cell *matHeaderCellDef> Логин </th>
+                                <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+                            </ng-container>
+
+                            <!-- Password Column -->
+                            <ng-container matColumnDef="password">
+                                <th mat-header-cell *matHeaderCellDef> Пароль </th>
+                                <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+                            </ng-container>
+
+                            <!-- Fio Column -->
+                            <ng-container matColumnDef="fio">
+                                <th mat-header-cell *matHeaderCellDef> ФИО </th>
+                                <td mat-cell *matCellDef="let element"> {{element.fio}} </td>
+                            </ng-container>
+
+                            <!-- Parents Column -->
+                            <ng-container matColumnDef="parents">
+                                <th mat-header-cell *matHeaderCellDef> Родитель </th>
+                                <td mat-cell cl *matCellDef="let element"> {{element.parents}} </td>
+                            </ng-container>
+
+                            <!-- Phone Column -->
+                            <ng-container matColumnDef="phone">
+                                <th mat-header-cell *matHeaderCellDef> Телефон </th>
+                                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                            </ng-container>
+
+                            <!-- Note Column -->
+                            <ng-container matColumnDef="note">
+                                <th mat-header-cell *matHeaderCellDef> Комментарии </th>
+                                <td mat-cell *matCellDef="let element"> {{element.note}} </td>
+                            </ng-container>
+
+                            <!-- edit -->
+                            <ng-container matColumnDef="edit">
+                                <th mat-header-cell *matHeaderCellDef> </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <fa-icon [icon]="faUserEdit" (click)="editStudent(element)">
+                                    </fa-icon>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnsStudents"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnsStudents;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                    <div class="m-3 text-center justify-content-between d-flex">
+                        <button mat-raised-button color="primary" (click)="addStudent()">
+                            Добавить ученика
+                        </button>
+                        <button mat-raised-button color="warn" [disabled]="true" (click)="deleteStudent()" [disabled]="flagDeleteStudent">
+                            Удалить выбранные
+                        </button>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span>Электронный журнал</span>
+        <div class="profile-icon ml-auto">
+            <fa-icon [icon]="faUser" mat-button [matMenuTriggerFor]="menu"></fa-icon>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Сменить пользователя</button>
+    <button mat-menu-item>Выйти</button>
+</mat-menu>

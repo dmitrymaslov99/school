@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Изменить студента</h1>
+<div mat-dialog-content class="">
+    <form [formGroup]="itemForm">
+        <p class="pb-0 mb-0">Логин</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="login">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Пароль</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="password">
+        </mat-form-field>
+        <p class="pb-0 mb-0">ФИО</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="fio">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Родители</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="parents">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Телефон</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="phone">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Комментарий</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="note">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Закрыть</button>
+    <button mat-button [mat-dialog-close]="itemForm.value" class="ml-auto">Изменить</button>
+</div>

@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+}
+
+// .tab-content {
+//     width: 100px;
+//     height: 60%;
+//     overflow: auto;
+// }
+.mat-cell .flex-stretch {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    /* align-items center so that cell content is vertically centered */
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+tr {
+    cursor: pointer;
+}
+
+// tr:hover {
+//     background-color: rgb(230, 230, 230);
+// }
+
+fa-icon {
+    color: rgba(0, 0, 0, .26);
+    font-size: 16px;
+}

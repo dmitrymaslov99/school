@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Добавление учителя</h1>
+<div mat-dialog-content class="">
+    <form [formGroup]="itemForm">
+        <p class="pb-0 mb-0">Логин</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="login">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Пароль</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="password">
+        </mat-form-field>
+        <p class="pb-0 mb-0">ФИО</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="fio">
+        </mat-form-field>
+        <p class="pb-0 mb-0">Предметы (через ;)</p>
+        <mat-form-field class="w-100">
+            <input matInput formControlName="items">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Закрыть</button>
+    <button mat-button (click)="addTeacher()" class="ml-auto">Добавить</button>
+</div>
