@@ -74,6 +74,7 @@ import { TeacherComponent } from './components/teacher/teacher/teacher.component
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
     FontAwesomeModule,
     // angular material
     BrowserAnimationsModule,

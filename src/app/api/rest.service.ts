@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable, ReplaySubject } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 Injectable({
@@ -18,7 +18,17 @@ export interface Teachers {
 export class RestService {
 
   private baseUrl = 'http://localhost:3000/';
+  private popupDialog = new ReplaySubject<{ popupEvent: string, component?, options?: {} }>();
 
+  public popupDialog$ = this.popupDialog.asObservable();
+
+  open(component, options?: {}) {
+    this.popupDialog.next({ popupEvent: 'open', component: component, options: options });
+  }
+
+  close() {
+    this.popupDialog.next({ popupEvent: 'close' });
+  }
   constructor(public http: HttpClient) {
   }
 
